@@ -1,5 +1,5 @@
 import { Application } from 'pixi.js'
-import { createApp } from 'vue'
+import { createApp, h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
 import App from './App.vue'
 

@@ -9,8 +9,8 @@
 - [exmaple-plane-fights ✈]()
 
 # ⚙️ Installation
-```coffeescript
-npm i -S vue-reveal-effect
+```shell
+npm i -S vue-runtime-pixi
 ```
 
 # 🦄 Use
@@ -28,7 +28,7 @@ const { stage, view } = new Application()
 
 createPIXI({
   setup() {
-    return () => h('Text', { text: 'test……', style: 'fill: white' })
+    return () => h('Text', { text: 'test……', style: 'fill: red' })
   }
 }).mount(stage)
 
