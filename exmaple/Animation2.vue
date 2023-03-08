@@ -1,4 +1,5 @@
 <template>
+  <Graphics />
   <Text text="loading" style="fill: white" />
   <my-animation :from="0" :to="300">
     <template #default="{ value }">
@@ -9,6 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { Graphics, Text } from 'pixi.js'
+import { Graphics } from 'pixi.js'
 import MyAnimation from './components/MyAnimation.vue'
 </script>

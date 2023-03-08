@@ -1,16 +1,20 @@
 import { RendererOptions } from 'vue'
 import { isOn, isString } from '@vue/shared'
 import * as PIXI from 'pixi.js'
-import { Container, DisplayObject, Sprite, Texture } from 'pixi.js'
-import patchEvent from './modules/patchEvent'
-import { get, set } from './utils'
+import { Container, DisplayObject, Sprite, Text, Texture } from 'pixi.js'
+import patchEvent from './modules/event'
 import { patchStyle } from './modules/style'
+import { get, set } from './utils'
 
 const OP = ':'
 
 export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
-  createElement(type) {
-    if (PIXI[type]?.prototype instanceof DisplayObject) return new PIXI[type]()
+  createElement(type, isSVG, is, props) {
+    let clazz
+    if (type === 'Class') clazz = props.is?.prototype instanceof DisplayObject ? props.is : null
+    else if (PIXI[type]?.prototype instanceof DisplayObject) clazz = PIXI[type]
+    else if (globalThis[type]?.prototype instanceof DisplayObject) clazz = globalThis[type]
+    return clazz ? (clazz.length == 1 ? new clazz(props) : new clazz()) : null
   },
   insert(el, parent, anchor) {
     if (!el || !parent) return

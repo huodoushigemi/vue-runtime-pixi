@@ -1,6 +1,13 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@pixi/core': ^7.1.1
+  '@pixi/display': ^7.1.1
+  '@pixi/events': ^7.1.1
+  '@pixi/graphics': ^7.1.1
+  '@pixi/sprite': ^7.1.1
+  '@pixi/text': ^7.1.1
+  '@pixi/ui': ^0.5.8
   '@rollup/plugin-typescript': ^11.0.0
   '@types/node': ^18.14.6
   '@vitejs/plugin-vue': ^4.0.0
@@ -15,9 +22,17 @@ specifiers:
   typescript: ^4.9.3
   vite: ^4.1.0
   vue: ^3.0.0
+  vue-router: ^4.1.6
   vue-tsc: ^1.0.24
 
 devDependencies:
+  '@pixi/core': 7.1.4
+  '@pixi/display': 7.1.4
+  '@pixi/events': 7.1.4
+  '@pixi/graphics': 7.1.4
+  '@pixi/sprite': 7.1.4
+  '@pixi/text': 7.1.4
+  '@pixi/ui': 0.5.8_7bxkjg7wbbosesbsu2sgapted4
   '@rollup/plugin-typescript': 11.0.0_elyygukqrpnyv7sactoooq5kjq
   '@types/node': 18.14.6
   '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
@@ -32,6 +47,7 @@ devDependencies:
   typescript: 4.9.5
   vite: 4.1.4_@types+node@18.14.6
   vue: 3.2.47
+  vue-router: 4.1.6_vue@3.2.47
   vue-tsc: 1.2.0_typescript@4.9.5
 
 packages:
@@ -613,6 +629,26 @@ packages:
       '@pixi/utils': 7.1.4
     dev: true
 
+  /@pixi/ui/0.5.8_7bxkjg7wbbosesbsu2sgapted4:
+    resolution: {integrity: sha512-udN+jl/XmLrEsWklGlj/d8zhCFktwK5MnKlTqRXDz/EBF219AS/pOGgsvNkk27o/LvpayqhT08d/ucA3UEkQmQ==}
+    peerDependencies:
+      '@pixi/core': ^7.1.1
+      '@pixi/display': ^7.1.1
+      '@pixi/events': ^7.1.1
+      '@pixi/graphics': ^7.1.1
+      '@pixi/sprite': ^7.1.1
+      '@pixi/text': ^7.1.1
+    dependencies:
+      '@pixi/core': 7.1.4
+      '@pixi/display': 7.1.4
+      '@pixi/events': 7.1.4
+      '@pixi/graphics': 7.1.4
+      '@pixi/sprite': 7.1.4
+      '@pixi/text': 7.1.4
+      tweedle.js: 2.0.1
+      typed-signals: 2.5.0
+    dev: true
+
   /@pixi/utils/7.1.4:
     resolution: {integrity: sha512-n02nsAWcOp8+2yWFQ7CjWctVnGFs8jpD9A8H+RFcvdy2kdjApAU8+HsuJIrl/wfrwnTRxUzYatTRejz0jD9bKA==}
     dependencies:
@@ -769,6 +805,10 @@ packages:
     dependencies:
       '@vue/compiler-dom': 3.2.47
       '@vue/shared': 3.2.47
+    dev: true
+
+  /@vue/devtools-api/6.5.0:
+    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==}
     dev: true
 
   /@vue/reactivity-transform/3.2.47:
@@ -1070,13 +1110,12 @@ packages:
     dev: true
 
   /punycode/1.3.2:
-    resolution: {integrity: sha512-RofWgt/7fL5wP1Y7fxE7/EmTLzQVnB0ycyibJ0OOHIlJqTNzglYFxVwETOcIoJqJmpDXJ9xImDv+Fq34F/d4Dw==}
+    resolution: {integrity: sha1-llOgNvt8HuQjQvIyXM7v6jkmxI0=}
     dev: true
 
   /querystring/0.2.0:
-    resolution: {integrity: sha512-X/xY82scca2tau62i9mDyU9K+I+djTMUsvwf7xnUX5GLvVzgJybOJf4Y6o9Zx3oJK/LSXg5tTZBjwzqVPaPO2g==}
+    resolution: {integrity: sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=}
     engines: {node: '>=0.4.x'}
-    deprecated: The querystring API is considered Legacy. new code should use the URLSearchParams API instead.
     dev: true
 
   /resolve/1.22.1:
@@ -1143,6 +1182,14 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: true
 
+  /tweedle.js/2.0.1:
+    resolution: {integrity: sha512-fplJpDKURJJyepxdpbTUbSsrsTj596s2uFyCckkqnIVvF1JAU6hEyrruZftCeSWBACrII5z1lzLuUERl5TfBhg==}
+    dev: true
+
+  /typed-signals/2.5.0:
+    resolution: {integrity: sha512-m9lHc3eBCJerXYdx+G0uWZihyUXdqTzzgOdqiDDsoUo75WjhFJH6vP5/6w/xhyu04zoxHUqgYhf9FEt85dk/Ng==}
+    dev: true
+
   /typescript/4.9.5:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
@@ -1150,7 +1197,7 @@ packages:
     dev: true
 
   /url/0.11.0:
-    resolution: {integrity: sha512-kbailJa29QrtXnxgq+DdCEGlbTeYM2eJUxsz6vjZavrCYPMIFHMKQmSKYAIuUK2i7hgPm28a8piX5NTUtM/LKQ==}
+    resolution: {integrity: sha1-ODjpfPxgUh63PFJajlW/3Z4uKPE=}
     dependencies:
       punycode: 1.3.2
       querystring: 0.2.0
@@ -1202,6 +1249,15 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      vue: 3.2.47
+    dev: true
+
+  /vue-router/4.1.6_vue@3.2.47:
+    resolution: {integrity: sha512-DYWYwsG6xNPmLq/FmZn8Ip+qrhFEzA14EI12MsMgVxvHFDYvlr4NXpVF5hrRH1wVcDP8fGi5F4rxuJSl8/r+EQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': 6.5.0
       vue: 3.2.47
     dev: true
 

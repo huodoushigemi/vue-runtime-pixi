@@ -26,4 +26,6 @@ export const PIXI_TAG = Object.entries(PIXI)
   .filter(([key, val]) => val.prototype instanceof DisplayObject)
   .map(([e]) => e)
 
+console.log(PIXI_TAG)
+
 export const isPIXITag = makeMap(PIXI_TAG.join(','))
