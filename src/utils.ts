@@ -1,7 +1,8 @@
-export function set(obj: Record<string, any>, key: string, val: any, op = '.') {
+export function set(obj: Record<string, any>, key: string, val: any, op = '.', assign?: boolean) {
   const keys = key.split(op)
   obj = keys.slice(0, -1).reduce((o, e) => (o[e] ??= {}), obj)
-  return (obj[keys.at(-1)!] = val)
+  key = keys.at(-1)!
+  return assign ? Object.assign(obj[key], val) : (obj[key] = val)
 }
 
 export function get(obj: Record<string, any>, key: string, op = '.') {

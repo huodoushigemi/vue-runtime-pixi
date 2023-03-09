@@ -41,6 +41,8 @@
     "@vue/shared": "^3.0.0",
     "@vueuse/core": "^9.13.0",
     "esbuild": "^0.17.11",
+    "gsap": "^3.11.4",
+    "pixi-filters": "^5.2.0",
     "pixi.js": "^7.1.4",
     "rollup": "^3.18.0",
     "rollup-plugin-esbuild": "^5.0.0",

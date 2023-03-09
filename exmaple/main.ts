@@ -1,4 +1,3 @@
-import { Application, Container } from 'pixi.js'
 import { createApp, h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
 import App from './App.vue'
@@ -11,7 +10,7 @@ import Animation3 from './Animation3.vue'
 const app = createApp(App)
 app.mount('#app')
 
-const appPIXI = createPIXI(AppPIXI, { app: new Application() })
+const appPIXI = createPIXI(AppPIXI)
 
 appPIXI.use(
   createRouter({

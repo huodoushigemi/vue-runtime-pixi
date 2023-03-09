@@ -1,6 +1,6 @@
 /// <reference path="../node_modules/@pixi/app" />
 
-import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, ICanvas } from 'pixi.js'
+import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, ICanvas, Application } from 'pixi.js'
 // import * as PIXI from 'pixi.js'
 import { DefineComponent } from 'vue'
 

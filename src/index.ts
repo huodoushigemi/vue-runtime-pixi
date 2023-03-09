@@ -17,7 +17,9 @@ type _App = App<Container> & { _props: RootProps; mount(stage?: Container) }
 
 export const render: RootRenderFunction<Container> = (...args) => ensureRenderer().render(...args)
 
-export const createApp = (root: Component, props: RootProps): _App => {
+export const createApp = (root: Component, props?: Partial<RootProps>): _App => {
+  props ??= {}
+  props.app ??= new Application()
   const app = ensureRenderer().createApp(root, props) as _App
   app.use(components)
   //

@@ -1,9 +1,8 @@
 <template>
   <!-- tabs -->
-  <!-- <Class v-for="item in btns" :is="item" /> -->
   <AssetsLoad :urls="['/button.png', '/button_hover.png', '/button_pressed.png', '/button_disabled.png']">
-    <Class :is="Layout" type="horizontal" :elementsMargin="20" :x="60" :y="40">
-      <Container v-for="path in routes">
+    <Class :is="scrollbox" type="horizontal">
+      <Container v-for="path in routes" :y="40">
         <Class :is="FancyButton" :ref="cb" v-bind="btnprops" :defaultView="Sprite.from('/button.png')" :hoverView="Sprite.from('/button_hover.png')" :pressedView="Sprite.from('/button_pressed.png')" :text="path" @click="onClick(path)" />
       </Container>
     </Class>
@@ -16,16 +15,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { Layout, FancyButton, ButtonOptions, RadioBoxOptions } from '@pixi/ui'
-import { Container, Graphics, Sprite, Text } from 'pixi.js'
+import { getCurrentInstance } from 'vue'
+import { ScrollBox, FancyButton, ButtonOptions, RadioBoxOptions } from '@pixi/ui'
+import { Container, Sprite } from 'pixi.js'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const proxy = getCurrentInstance().proxy
+
+const scrollbox = new ScrollBox({ type: 'horizontal', elementsMargin: 20, width: proxy.$app.screen.width, height: 80, horPadding: 40, background: 0xffffff })
+scrollbox.addChild = scrollbox.addItem
+scrollbox.removeChild = scrollbox.removeItem
+
 type Extract<T extends Record<string, any>, E> = { [K in keyof T]: T[K] extends E ? K : never }[keyof T]
 
-const routes = ['animation1', 'animation2', 'animation3', 'snake 🐍', 'plane-fights 🚀']
+const routes = ['animation1', 'animation2', 'animation3', 'snake 🐍', 'plane-fights 🚀', 'xxx']
 
 const aaa = { color: 0xf1d583, width: 25, height: 25, radius: 10, padding: 4 }
 const bbb = { color: 0xf1d583, width: 25, height: 25, radius: 10, padding: 4, fillColor: 0x82c822 }
@@ -37,9 +42,6 @@ const asd: RadioBoxOptions = {
   elementsMargin: 10,
   style: { bg: aaa, checked: bbb, textStyle: { fill: 0xffffff, fontSize: 32 } }
 }
-
-const defaultView = new Graphics().beginFill(0xcccccc).drawRoundedRect(0, 0, 100, 40, 10).endFill()
-const text = new Text('route', { fill: '#ffffff' })
 
 const animations: ButtonOptions['animations'] = {
   hover: { props: { scale: { x: 1.1, y: 1.1 }, y: -2 }, duration: 100 },
