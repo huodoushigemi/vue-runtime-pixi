@@ -26,6 +26,7 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@pixi/app": "^7.1.4",
     "@pixi/core": "^7.1.1",
     "@pixi/display": "^7.1.1",
     "@pixi/events": "^7.1.1",

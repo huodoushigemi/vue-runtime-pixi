@@ -1,43 +1,31 @@
 <template>
-  <!-- <Text text="ssss" style="fill: red" :y="100" /> -->
   <!-- tabs -->
-  <!-- <Class v-for="route in routes" :is="CheckBox" :ref="checkBox" :text="route" :checked="false" :style="{ unchecked: unchecked(), checked: checked(), text: { fill: 0xffffff } }" /> -->
-  <!-- <Class :is="CheckBox" text="XXXXX" :style="{ unchecked: defaultView, checked: defaultView, text: { fill: 0xffffff } }" /> -->
-  <Graphics :x="123" :y="0" :beginFill="[]" />
-  <Sprite :x="1" :texture="undefined" />
-  <Class :is="radio.innerView" />
-  <Class :is="Layout" />
-  <!-- <Class :is="Layout" type="horizontal" :elementsMargin="10"> -->
-  <!-- </Class> -->
-  <!-- <Text text="123" />
-  <Text text="123" />
-  <Text text="123" /> -->
+  <!-- <Class v-for="item in btns" :is="item" /> -->
+  <AssetsLoad :urls="['/button.png', '/button_hover.png', '/button_pressed.png', '/button_disabled.png']">
+    <Class :is="Layout" type="horizontal" :elementsMargin="20" :x="60" :y="40">
+      <Container v-for="path in routes">
+        <Class :is="FancyButton" :ref="cb" v-bind="btnprops" :defaultView="Sprite.from('/button.png')" :hoverView="Sprite.from('/button_hover.png')" :pressedView="Sprite.from('/button_pressed.png')" :text="path" @click="onClick(path)" />
+      </Container>
+    </Class>
+  </AssetsLoad>
 
   <!-- main -->
-  <Container y="60">
+  <Container :y="80" :width="$app.screen.width">
     <router-view />
   </Container>
 </template>
 
 <script setup lang="ts">
-import { Layout, Button, FancyButton, ButtonOptions, CheckBox, RadioGroup, RadioBoxOptions } from '@pixi/ui'
-import { Container, Graphics, Text } from 'pixi.js'
-import { getStage } from 'vue-runtime-pixi'
+import { ref } from 'vue'
+import { Layout, FancyButton, ButtonOptions, RadioBoxOptions } from '@pixi/ui'
+import { Container, Graphics, Sprite, Text } from 'pixi.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 type Extract<T extends Record<string, any>, E> = { [K in keyof T]: T[K] extends E ? K : never }[keyof T]
 
-type zxc = Extract<{ x: number; d: string }, string>
-
-const routes = ['animation1', 'animation2', 'animation3', 'animation4', 'animation5']
-
-function checkBox(el: CheckBox) {
-  el.onCheck.connect(checked => {
-    console.log(checked)
-  })
-  // el.onChange.connect((checked) => {
-  //   console.log(checked)
-  // })
-}
+const routes = ['animation1', 'animation2', 'animation3', 'snake 🐍', 'plane-fights 🚀']
 
 const aaa = { color: 0xf1d583, width: 25, height: 25, radius: 10, padding: 4 }
 const bbb = { color: 0xf1d583, width: 25, height: 25, radius: 10, padding: 4, fillColor: 0x82c822 }
@@ -50,8 +38,6 @@ const asd: RadioBoxOptions = {
   style: { bg: aaa, checked: bbb, textStyle: { fill: 0xffffff, fontSize: 32 } }
 }
 
-const radio = new RadioGroup(asd)
-
 const defaultView = new Graphics().beginFill(0xcccccc).drawRoundedRect(0, 0, 100, 40, 10).endFill()
 const text = new Text('route', { fill: '#ffffff' })
 
@@ -60,7 +46,24 @@ const animations: ButtonOptions['animations'] = {
   pressed: { props: { scale: { x: 0.9, y: 0.9 }, y: 4 }, duration: 100 }
 }
 
-function cb(el: FancyButton) {
+function cb(el?: FancyButton) {
+  if (!el) return
   el.anchor.set(0.5, 0.5)
+  el.scale.set(0.45, 0.45)
+  el.textView.style.fill = 0xffffff
+  el.textView.style.fontSize = 42
+  el.textView.style.dropShadow = true
+  el.textView.style.dropShadowBlur = 8
+}
+
+function onClick(path: string) {
+  router.push(path)
+}
+
+const btnprops: Partial<ButtonOptions> = {
+  animations,
+  anchorX: 0.5,
+  anchorY: 0.5,
+  textOffset: { y: -10 }
 }
 </script>

@@ -10,7 +10,7 @@ const OP = ':'
 
 export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
   createElement(type, isSVG, is, props) {
-    if (props.is instanceof DisplayObject) return props.is
+    if (props?.is instanceof DisplayObject) return props.is
     let clazz
     if (type === 'Class') clazz = props.is?.prototype instanceof DisplayObject ? props.is : null
     else if (PIXI[type]?.prototype instanceof DisplayObject) clazz = PIXI[type]
@@ -37,7 +37,7 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
         case 'style':
           patchStyle(el as any, preVal, nxtVal)
           break
-        case 'texture':
+        case 'image':
           ;(el as Sprite).texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal
           break
         default:

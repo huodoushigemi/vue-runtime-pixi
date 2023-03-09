@@ -1,14 +1,10 @@
 <template>
-  <Text text="loading" style="fill: white" />
-  <my-animation :from="0" :to="300">
-    <template #default="{ value }">
-      <Text text="xxxx" :x="value" :y="value" style="fill: white" />
-    </template>
-  </my-animation>
-  <router-view />
+  <Sprite ref="character" />
 </template>
 
 <script setup lang="ts">
-import { Graphics, Text } from 'pixi.js'
-import MyAnimation from './components/MyAnimation.vue'
+import { Graphics, Sprite, Text, Texture } from 'pixi.js'
+import { ref } from 'vue'
+
+const character = ref<Sprite>()
 </script>

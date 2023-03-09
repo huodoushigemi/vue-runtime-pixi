@@ -1,8 +1,9 @@
 import * as PIXI from 'pixi.js'
-import { Container, DisplayObject } from 'pixi.js'
-import { createRenderer, Renderer, RootRenderFunction, CreateAppFunction, getCurrentInstance, reactive, ComputedRef, Ref } from 'vue'
+import { Application, Container, DisplayObject } from 'pixi.js'
+import { createRenderer, Renderer, RootRenderFunction, getCurrentInstance, Ref, App, Component } from 'vue'
 import { makeMap } from '@vue/shared'
 
+import components from './components'
 import { nodeOps } from './nodeOps'
 
 let renderer: Renderer<Container>
@@ -11,16 +12,20 @@ function ensureRenderer() {
   return (renderer ??= createRenderer(nodeOps))
 }
 
+type RootProps = { app: Application } & Record<string, unknown>
+type _App = App<Container> & { _props: RootProps; mount(stage?: Container) }
+
 export const render: RootRenderFunction<Container> = (...args) => ensureRenderer().render(...args)
 
-export const createApp: CreateAppFunction<Container> = (...args) => {
-  const app = ensureRenderer().createApp(...args)
-  // Object.defineProperty(app.config, 'isNativeTag', { value: isPIXITag, writable: false })
-  // app.config.compilerOptions.isCustomElement = isPIXITag
-  // app.config.isCustomElement = isPIXITag
+export const createApp = (root: Component, props: RootProps): _App => {
+  const app = ensureRenderer().createApp(root, props) as _App
+  app.use(components)
+  //
+  app.config.globalProperties.$app = props.app
+  app.config.globalProperties.$stage = props.app.stage
+  //
   const mount = app.mount
-  app.mount = (stage: Container) => {
-    app.config.globalProperties.$stage = stage
+  app.mount = (stage = props.app.stage) => {
     return mount(stage, false, false)
   }
   return app

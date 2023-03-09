@@ -1,32 +1,52 @@
-import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite } from 'pixi.js'
-import * as PIXI from 'pixi.js'
+/// <reference path="../node_modules/@pixi/app" />
 
-const pixi = { ...PIXI }
+import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, ICanvas } from 'pixi.js'
+// import * as PIXI from 'pixi.js'
+import { DefineComponent } from 'vue'
 
-type Extract<T extends Record<string, any>, E> = { [K in keyof T]: T[K] extends E ? K : never }[keyof T]
+// type Extract<T extends Record<string, any>, P> = { [K in keyof T]: ExtendOf<T[K], P> extends true ? K : never }[keyof T]
+// type DisplayObjectKeys = Extract<typeof PIXI, DisplayObject>
 
-type DisplayObjectKeys = Extract<typeof PIXI, typeof DisplayObject>
+// prettier-ignore
+type ExtendOf<T, P, TRUE = true, FALSE = false> = T extends null | undefined ? FALSE :
+  T extends P ? TRUE :
+  T extends { prototype: infer V } ? ExtendOf<V, P, TRUE, FALSE> :
+  FALSE
 
-type Fun2Arr<T> = { [K in keyof T]?: T[K] extends (...args: infer A) => any ? A : T[K] }
-
-type aaa = Fun2Arr<{ beginFill: Graphics['beginFill'] }>
-// type aaa = Fun2Arr<{}>
-
-type AAA = { [K in DisplayObjectKeys]: DefineComponent<Fun2Arr<typeof PIXI[K]>> }
+type Fun2Arr<T> = {
+  [K in keyof T]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
+}
+type DefineDO<T> = DefineComponent<Fun2Arr<T>>
 
 interface _Text extends Text {
-  style: any
+  style: string | Partial<ITextStyle>
 }
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $stage: Container
+    $app: Application
   }
 
-  export interface GlobalComponents extends AAA {
-    Text: DefineComponent<Fun2Arr<_Text>>
-    Graphics: DefineComponent<Fun2Arr<Graphics>>
-    Sprite: DefineComponent<Fun2Arr<Sprite>>
-    // Class: DefineComponent<{ is: DisplayObject | { prototype: DisplayObject } }>
+  export interface GlobalComponents extends DisplayObjects {
+    AssetsLoad: typeof import('./components')['AssetsLoad']
+  }
+
+  type DisplayObjects = {
+    Container: DefineDO<Container>
+    Sprite: DefineDO<Sprite & { image: string }>
+    AnimatedSprite: DefineDO<AnimatedSprite>
+    Text: DefineDO<_Text>
+    Graphics: DefineDO<Graphics>
+    TemporaryDisplayObject: DefineDO<TemporaryDisplayObject>
+    Mesh: DefineDO<Mesh>
+    NineSlicePlane: DefineDO<NineSlicePlane>
+    SimpleMesh: DefineDO<SimpleMesh>
+    SimplePlane: DefineDO<SimplePlane>
+    SimpleRope: DefineDO<SimpleRope>
+    ParticleContainer: DefineDO<ParticleContainer>
+    TilingSprite: DefineDO<TilingSprite>
+    BitmapText: DefineDO<BitmapText>
+    Class: DefineComponent<{ is: DisplayObject | typeof DisplayObject }>
   }
 }

@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@pixi/app': ^7.1.4
   '@pixi/core': ^7.1.1
   '@pixi/display': ^7.1.1
   '@pixi/events': ^7.1.1
@@ -26,6 +27,7 @@ specifiers:
   vue-tsc: ^1.0.24
 
 devDependencies:
+  '@pixi/app': 7.1.4
   '@pixi/core': 7.1.4
   '@pixi/display': 7.1.4
   '@pixi/events': 7.1.4
