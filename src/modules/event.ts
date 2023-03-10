@@ -9,7 +9,7 @@ export default function patchEvent(el: DisplayObject & { _vei?: any }, key: stri
 }
 
 function createInvoker(el: DisplayObject, name: keyof DisplayObjectEvents, val) {
-  const invoker = () => invoker.value()
+  const invoker = (...args) => invoker.value(...args)
   invoker.value = val
   el.on(name, invoker)
   return invoker

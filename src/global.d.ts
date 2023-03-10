@@ -1,8 +1,9 @@
-/// <reference path="../node_modules/@pixi/app" />
+import type { Application, DisplayObjectEvents } from 'pixi.js'
+import { utils } from '@pixi/core'
 
 import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, ICanvas, Application } from 'pixi.js'
 // import * as PIXI from 'pixi.js'
-import { DefineComponent } from 'vue'
+import type { DefineComponent } from 'vue'
 
 // type Extract<T extends Record<string, any>, P> = { [K in keyof T]: ExtendOf<T[K], P> extends true ? K : never }[keyof T]
 // type DisplayObjectKeys = Extract<typeof PIXI, DisplayObject>
@@ -16,7 +17,11 @@ type ExtendOf<T, P, TRUE = true, FALSE = false> = T extends null | undefined ? F
 type Fun2Arr<T> = {
   [K in keyof T]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
 }
-type DefineDO<T> = DefineComponent<Fun2Arr<T>>
+
+type EventListener<T, K> = utils.EventEmitter.EventListener<T, K>
+type Events = { [K in keyof DisplayObjectEvents as `on${Capitalize<K>}`]: EventListener<DisplayObjectEvents, K> }
+
+type DefineDO<T> = DefineComponent<Fun2Arr<T> & Partial<Events>>
 
 interface _Text extends Text {
   style: string | Partial<ITextStyle>

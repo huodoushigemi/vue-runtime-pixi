@@ -1,7 +1,7 @@
 import { RendererOptions } from 'vue'
 import { isOn, isString } from '@vue/shared'
 import * as PIXI from 'pixi.js'
-import { Container, DisplayObject, Sprite, Text, Texture } from 'pixi.js'
+import { AnimatedSprite, Container, DisplayObject, Graphics, Mesh, NineSlicePlane, ParticleContainer, SimpleMesh, SimplePlane, SimpleRope, Sprite, TemporaryDisplayObject, Text, Texture, TilingSprite } from 'pixi.js'
 import patchEvent from './modules/event'
 import { patchStyle } from './modules/style'
 import { get, set } from './utils'
@@ -10,13 +10,43 @@ const OP = ':'
 
 export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
   createElement(type, isSVG, is, props) {
-    if (props?.is instanceof DisplayObject) return props.is
-    if (type == 'Sprite') return new Sprite(props.texture)
+    props ??= {}
+    switch (type) {
+      case 'Sprite':
+        return new Sprite(props.texture)
+      case 'BitmapText':
+        return new Sprite(props.text)
+      case 'TilingSprite':
+        return new TilingSprite(props.texture)
+      case 'SimpleRope':
+        return new SimpleRope(props.texture, props.points)
+      case 'SimplePlane':
+        return new SimplePlane(props.texture)
+      case 'NineSlicePlane':
+        return new NineSlicePlane(props.texture)
+      case 'Mesh':
+        return new Mesh(props.geometry, props.shader)
+      case 'Graphics':
+        return new Graphics(props.geometry)
+      case 'AnimatedSprite':
+        return new AnimatedSprite(props.textures)
+      case 'ParticleContainer':
+        return new ParticleContainer()
+      case 'Text':
+        return new Text()
+      case 'SimpleMesh':
+        return new SimpleMesh(props.texture)
+      case 'TemporaryDisplayObject':
+        return new TemporaryDisplayObject()
+      case 'Container':
+        return new Container()
+    }
+    //
+    if (props.is instanceof DisplayObject) return props.is
     //
     let clazz
     if (type === 'Class') clazz = props.is?.prototype instanceof DisplayObject ? props.is : null
     else if (PIXI[type]?.prototype instanceof DisplayObject) clazz = PIXI[type]
-    else if (globalThis[type]?.prototype instanceof DisplayObject) clazz = globalThis[type]
     return clazz ? (clazz.length == 1 ? new clazz(props) : new clazz()) : null
   },
   insert(el, parent, anchor) {
@@ -43,7 +73,7 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
           patchStyle(el as any, preVal, nxtVal)
           break
         case 'image':
-          ;(el as Sprite).texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal
+          if (el instanceof Sprite) el.texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal
           break
         default:
           set(el, key, nxtVal, OP)

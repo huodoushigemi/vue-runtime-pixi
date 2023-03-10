@@ -20,8 +20,8 @@ onBeforeUnmount(() => {
 let count = 0
 
 function tick() {
-  count += 0.01
-  blurFilter1.blur = 20 * Math.cos(count)
-  blurFilter2.blur = 20 * Math.sin(count)
+  count += 0.005
+  blurFilter1.blur = 10 * Math.cos(count)
+  blurFilter2.blur = 10 * Math.sin(count)
 }
 </script>

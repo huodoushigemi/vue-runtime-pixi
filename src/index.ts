@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import { Application, Container, DisplayObject } from 'pixi.js'
+import { Application, Container, DisplayObject, IApplicationOptions } from 'pixi.js'
 import { createRenderer, Renderer, RootRenderFunction, getCurrentInstance, Ref, App, Component } from 'vue'
 import { makeMap } from '@vue/shared'
 
@@ -12,14 +12,14 @@ function ensureRenderer() {
   return (renderer ??= createRenderer(nodeOps))
 }
 
-type RootProps = { app: Application } & Record<string, unknown>
+type RootProps = { app: Application } & IApplicationOptions & Record<string, unknown>
 type _App = App<Container> & { _props: RootProps; mount(stage?: Container) }
 
 export const render: RootRenderFunction<Container> = (...args) => ensureRenderer().render(...args)
 
 export const createApp = (root: Component, props?: Partial<RootProps>): _App => {
   props ??= {}
-  props.app ??= new Application()
+  props.app ??= new Application(props)
   const app = ensureRenderer().createApp(root, props) as _App
   app.use(components)
   //
@@ -43,11 +43,3 @@ console.log(PIXI_TAG)
 export const isPIXITag = makeMap(PIXI_TAG.join(','))
 
 export const getStage = (): Container => getCurrentInstance().appContext.app.config.globalProperties.$stage
-
-export const stage: Ref<Container> = {
-  get value() {
-    return getStage()
-  },
-  // @ts-ignore
-  __v_isRef: true
-}

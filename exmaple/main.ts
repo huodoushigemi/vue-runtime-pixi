@@ -3,9 +3,6 @@ import { createApp as createPIXI } from 'vue-runtime-pixi'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import AppPIXI from './AppPIXI.vue'
-import Animation1 from './Animation1.vue'
-import Animation2 from './Animation2.vue'
-import Animation3 from './Animation3.vue'
 
 const app = createApp(App)
 app.mount('#app')
@@ -16,10 +13,15 @@ appPIXI.use(
   createRouter({
     history: createWebHistory(),
     routes: [
-      { path: '/', redirect: '/animation1' },
-      { path: '/animation1', component: Animation1 },
-      { path: '/animation2', component: Animation2 },
-      { path: '/animation3', component: Animation3 }
+      { path: '/', redirect: '/Animation1' },
+      { path: '/Animation1', component: () => import('./Animation1.vue') },
+      { path: '/Animation2', component: () => import('./Animation2.vue') },
+      { path: '/Animation3', component: () => import('./Animation3.vue') },
+      { path: '/Animation4', component: () => import('./Animation4.vue') },
+      { path: '/Snake 🐍', component: () => import('./Snake🐍.vue') },
+      { path: encodeURI('/Snake 🐍'), component: () => import('./Snake🐍.vue') },
+      { path: '/PlaneFights 🚀', component: () => import('./PlaneFights🚀.vue') },
+      { path: encodeURI('/PlaneFights 🚀'), component: () => import('./PlaneFights🚀.vue') }
     ]
   })
 )
