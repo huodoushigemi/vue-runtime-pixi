@@ -1,5 +1,5 @@
-<p align="center">
-  <img src="./public/techs-free-weekend.png" style="margin-bottom: -130px" alt="pixi-react" width="310" />
+<p align="center" style="margin-bottom: -130px">
+  <img src="./public/techs-free-weekend.png" alt="pixi-react" width="310" />
 </p>
 
 <h1 align="center">VuePixi</h1>
