@@ -25,9 +25,9 @@
 
 ## 🌈 DEMO
 - [exmaple-animation1](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
-- [exmaple-animation2](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
-- [exmaple-animation3](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
-- [exmaple-animation4](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
+- [exmaple-animation2](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation2)
+- [exmaple-animation3](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation3)
+- [exmaple-animation4](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation4)
 - [exmaple-snake 🐍](https://huodoushigemi.github.io/vue-runtime-pixi/#/snake🐍)
 - [exmaple-plane-fights 🚀](https://huodoushigemi.github.io/vue-runtime-pixi/#/plane-fights🚀)
 
