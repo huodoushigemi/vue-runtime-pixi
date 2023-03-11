@@ -23,6 +23,7 @@ export const render: RootRenderFunction<Container> = (...args) => ensureRenderer
 export const createApp = (root: Component, props?: Partial<RootProps>): _App => {
   props ??= {}
   const app = props.app ?? new Application(props)
+  //
   const vueapp = ensureRenderer().createApp(root, props) as _App
   vueapp.config.globalProperties.$app = app
   vueapp.config.globalProperties.$stage = app.stage
@@ -35,6 +36,7 @@ export const createApp = (root: Component, props?: Partial<RootProps>): _App => 
     container.appendChild(app.view)
     return mount(app.stage, false, false)
   }
+  //
   return vueapp
 }
 

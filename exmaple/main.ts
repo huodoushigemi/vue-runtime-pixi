@@ -7,16 +7,16 @@ import AppPIXI from './AppPIXI.vue'
 createApp(App).mount('#app')
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(''),
   routes: [
     { path: '/', redirect: '/Animation1' },
-    { path: '/Animation1', component: { render: () => h('Text', { text: 'VueRouter……', style: 'fill: red' }) } },
+    { path: '/Animation1', component: () => import('./Animation1.vue') },
     { path: '/Animation2', component: () => import('./Animation2.vue') },
     { path: '/Animation3', component: () => import('./Animation3.vue') },
     { path: '/Animation4', component: () => import('./Animation4.vue') },
     { path: '/Snake 🐍', component: () => import('./Snake🐍.vue') },
-    { path: encodeURI('/Snake 🐍'), component: () => import('./Snake🐍.vue') },
     { path: '/PlaneFights 🚀', component: () => import('./PlaneFights🚀.vue') },
+    { path: encodeURI('/Snake 🐍'), component: () => import('./Snake🐍.vue') },
     { path: encodeURI('/PlaneFights 🚀'), component: () => import('./PlaneFights🚀.vue') }
   ]
 })
