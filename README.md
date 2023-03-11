@@ -28,8 +28,8 @@
 - [exmaple-animation2](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation2)
 - [exmaple-animation3](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation3)
 - [exmaple-animation4](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation4)
-- [exmaple-snake 🐍](https://huodoushigemi.github.io/vue-runtime-pixi/#/snake🐍)
-- [exmaple-plane-fights 🚀](https://huodoushigemi.github.io/vue-runtime-pixi/#/plane-fights🚀)
+- [exmaple-snake 🐍](https://huodoushigemi.github.io/vue-runtime-pixi/#/Snake%20🐍)
+- [exmaple-plane-fights 🚀](https://huodoushigemi.github.io/vue-runtime-pixi/#/PlaneFights%20🚀)
 
 ## ⚙️ Installation
 ```shell

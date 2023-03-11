@@ -4,7 +4,6 @@
     <Graphics :zIndex="1">
       <Graphics :beginFill="[0x2d333b]" :drawRect="[0, 0, width, 55]" endFill :alpha="0.75" />
       <Text text="🛸 PlaneFight" :x="12" :style+="{ fill: 0xffffff, lineHeight: 55 }" />
-      <Sprite image="https://huodoushigemi.github.io/docx2vue/assets/github-540f5a2f.svg" :x="168" :y="5" :width="45" :height="45" cursor="pointer" @click="toGithub" />
     </Graphics>
 
     <!-- 飞机 -->

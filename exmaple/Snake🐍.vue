@@ -4,7 +4,6 @@
     <Graphics :zIndex="1">
       <Graphics :beginFill="[0x2d333b]" :drawRect="[0, 0, width, 55]" endFill :alpha="0.75" />
       <Text text="🐍 SNAKE" :x="12" :style+="{ fill: 0xffffff, lineHeight: 55 }" />
-      <Sprite image="https://huodoushigemi.github.io/docx2vue/assets/github-540f5a2f.svg" :x="168" :y="5" :width="45" :height="45" cursor="pointer" @click="toGithub" />
     </Graphics>
 
     <!-- 网格 -->
@@ -57,7 +56,7 @@ const food = ref<Point>(genFood())
 let direction = 'ArrowRight'
 let nextDirection = direction
 
-useEventListener(window, 'keydown', (e) => {
+useEventListener(window, 'keydown', e => {
   // 按空格 暂停/继续
   if (e.key == ' ') return isActive.value ? pause() : resume()
   // 🎮 ↑ ↓ ← →
@@ -83,7 +82,7 @@ const { resume, pause, isActive } = useIntervalFn(() => {
   // 撞墙
   if (!isRange(next)) return pause(), alert('撞墙身亡，游戏结束')
   // 自尽
-  if (snake.value.slice(0, -1).some((e) => isSamePoint(e, next))) return pause(), alert('咬到自己，游戏结束')
+  if (snake.value.slice(0, -1).some(e => isSamePoint(e, next))) return pause(), alert('咬到自己，游戏结束')
 
   snake.value.unshift(next)
 
@@ -122,7 +121,7 @@ function random(max: number, min = 0) {
 function genFood() {
   let point!: Point
   do point = [random(maxX.value), random(maxY.value)]
-  while (snake.value.some((e) => isSamePoint(e, point)))
+  while (snake.value.some(e => isSamePoint(e, point)))
   return point
 }
 </script>
