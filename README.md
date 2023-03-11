@@ -1,10 +1,9 @@
-<p align="center" style="margin-bottom: -130px">
+<p align="center">
   <img src="./public/techs-free-weekend.png" alt="pixi-react" width="310" />
 </p>
 
-<h1 align="center">VuePixi</h1>
+<h1 align="center">Vue Runtime Pixi</h1>
 
-<br /><br /><br />
 
 <p align="center">
   <strong>Write PIXI applications using Vue SFC 👌</strong>
