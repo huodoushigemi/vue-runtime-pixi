@@ -1,7 +1,7 @@
 import { createApp, h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
 import App from './App.vue'
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import AppPIXI from './AppPIXI.vue'
 
 createApp(App).mount('#app')
@@ -15,9 +15,11 @@ const router = createRouter({
     { path: '/Animation3', component: () => import('./Animation3.vue') },
     { path: '/Animation4', component: () => import('./Animation4.vue') },
     { path: '/Snake 🐍', component: () => import('./Snake🐍.vue') },
+    { path: '/Snake🐍', redirect: '/Snake 🐍' },
+    { path: encodeURI('/Snake 🐍'), redirect: '/Snake 🐍' },
     { path: '/PlaneFights 🚀', component: () => import('./PlaneFights🚀.vue') },
-    { path: encodeURI('/Snake 🐍'), component: () => import('./Snake🐍.vue') },
-    { path: encodeURI('/PlaneFights 🚀'), component: () => import('./PlaneFights🚀.vue') }
+    { path: '/PlaneFights🚀', redirect: '/PlaneFights 🐍' },
+    { path: encodeURI('/PlaneFights 🚀'), redirect: '/PlaneFights 🐍' }
   ]
 })
 

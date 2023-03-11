@@ -4,10 +4,11 @@
 
 <h1 align="center">Vue Runtime Pixi</h1>
 
-
 <p align="center">
   <strong>Write PIXI applications using Vue SFC 👌</strong>
 </p>
+
+<br />
 
 <p align="center">
   <img src="https://img.shields.io/github/forks/huodoushigemi/vue-runtime-pixi.svg?style=flat-square" />
@@ -23,12 +24,12 @@
 - Typescript friendly
 
 ## 🌈 DEMO
-- [exmaple-animation1]()
-- [exmaple-animation2]()
-- [exmaple-animation3]()
-- [exmaple-animation4]()
-- [exmaple-snake 🐍]()
-- [exmaple-plane-fights ✈]()
+- [exmaple-animation1](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
+- [exmaple-animation2](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
+- [exmaple-animation3](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
+- [exmaple-animation4](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
+- [exmaple-snake 🐍](https://huodoushigemi.github.io/vue-runtime-pixi/#/snake🐍)
+- [exmaple-plane-fights 🚀](https://huodoushigemi.github.io/vue-runtime-pixi/#/plane-fights🚀)
 
 ## ⚙️ Installation
 ```shell
