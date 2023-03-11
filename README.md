@@ -18,7 +18,7 @@
 
 <br />
 
-## News!
+## 📑 News!
 - Full Vue3 support including [Vue Router](https://router.vuejs.org/)、[Pinia](https://pinia.vuejs.org/)、[VueUse](https://vueuse.org/)
 - Typescript friendly
 
