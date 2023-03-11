@@ -15,6 +15,7 @@ export default defineConfig({
       'vue-runtime-pixi': path.resolve(__dirname, './src/index')
     }
   },
+  base: './',
   build: {
     outDir: 'docs'
   }
