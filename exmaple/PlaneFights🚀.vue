@@ -10,20 +10,16 @@
     <!-- 飞机 -->
     <Text ref="plane" text="🛸" :style="{ fontSize: 64 }" :x="width >> 1" :y="height * 0.75" :anchor+="{ x: 0.5, y: 0.5 }" />
 
-    <!-- 子弹 -->
-    <!-- <template v-for="e in bullets">
-      <Class :is="e" />
-    </template> -->
+    <!-- 子弹容器 -->
     <Container ref="container" />
   </Graphics>
 </template>
 
 <script setup lang="ts">
-import { computed, getCurrentInstance, shallowRef, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useEventListener, useIntervalFn, onKeyStroke } from '@vueuse/core'
-import { Container, DisplayObjectEvents, FederatedPointerEvent, Sprite, Text, Texture } from 'pixi.js'
+import { getCurrentInstance, shallowRef, onBeforeUnmount, ref } from 'vue'
+import { useIntervalFn } from '@vueuse/core'
+import { Container, FederatedPointerEvent, Sprite, Text } from 'pixi.js'
 import { gsap } from 'gsap'
-import { remove } from '@vue/shared'
 
 const ins = getCurrentInstance().proxy
 
@@ -32,6 +28,7 @@ const { width, height } = ins.$app.screen
 // 飞机
 const plane = shallowRef<Container>()
 
+// 鼠标移动
 function onMove(e: FederatedPointerEvent) {
   plane.value.parent.toLocal(e.global, null, plane.value.position)
 }

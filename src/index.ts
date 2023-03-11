@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import { Application, Container, DisplayObject, IApplicationOptions } from 'pixi.js'
-import { createRenderer, Renderer, RootRenderFunction, getCurrentInstance, Ref, App, Component } from 'vue'
-import { makeMap } from '@vue/shared'
+import { createRenderer, Renderer, RootRenderFunction, getCurrentInstance, ComponentPublicInstance, App, Component } from 'vue'
+import { isString, makeMap } from '@vue/shared'
 
 import components from './components'
 import { nodeOps } from './nodeOps'
@@ -13,24 +13,29 @@ function ensureRenderer() {
 }
 
 type RootProps = { app: Application } & IApplicationOptions & Record<string, unknown>
-type _App = App<Container> & { _props: RootProps; mount(stage?: Container) }
+interface _App extends App {
+  _props: RootProps
+  mount(c: string | Element): ComponentPublicInstance | null
+}
 
 export const render: RootRenderFunction<Container> = (...args) => ensureRenderer().render(...args)
 
 export const createApp = (root: Component, props?: Partial<RootProps>): _App => {
   props ??= {}
-  props.app ??= new Application(props)
-  const app = ensureRenderer().createApp(root, props) as _App
-  app.use(components)
+  const app = props.app ?? new Application(props)
+  const vueapp = ensureRenderer().createApp(root, props) as _App
+  vueapp.config.globalProperties.$app = app
+  vueapp.config.globalProperties.$stage = app.stage
+  vueapp.use(components)
   //
-  app.config.globalProperties.$app = props.app
-  app.config.globalProperties.$stage = props.app.stage
-  //
-  const mount = app.mount
-  app.mount = (stage = props.app.stage) => {
-    return mount(stage, false, false)
+  const mount = vueapp.mount as App['mount']
+  vueapp.mount = (c: string | Element): any => {
+    const container = isString(c) ? document.querySelector(c) : c
+    if (!container) return console.error(`Failed to mount app: mount target selector "${c}" returned null.`)
+    container.appendChild(app.view)
+    return mount(app.stage, false, false)
   }
-  return app
+  return vueapp
 }
 
 export const PIXI_TAG = Object.entries(PIXI)

@@ -15,11 +15,14 @@ type ExtendOf<T, P, TRUE = true, FALSE = false> = T extends null | undefined ? F
   FALSE
 
 type Fun2Arr<T> = {
-  [K in keyof T]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
+  [K in ExcludeP<T, '_' | 'on'>]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
 }
 
 type EventListener<T, K> = utils.EventEmitter.EventListener<T, K>
 type Events = { [K in keyof DisplayObjectEvents as `on${Capitalize<K>}`]: EventListener<DisplayObjectEvents, K> }
+
+type IsP<T, P, TRUE, FALSE> = T extends `${P}${infer S}` ? TRUE : FALSE
+type ExcludeP<T, P> = { [K in keyof T]: IsP<K, P, never, K> }[keyof T]
 
 type DefineDO<T> = DefineComponent<Fun2Arr<T> & Partial<Events>>
 

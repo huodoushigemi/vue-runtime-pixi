@@ -9,7 +9,7 @@
   </AssetsLoad>
 
   <!-- main -->
-  <Container :y="80" :width="$app.screen.width">
+  <Container :y="80" :width="$app.screen.width" :getChildAt="[0]">
     <router-view />
   </Container>
 </template>

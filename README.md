@@ -1,8 +1,29 @@
-# `Developing……`
+<p align="center">
+  <img src="./public/techs-free-weekend.png" style="margin-bottom: -130px" alt="pixi-react" width="310" />
+</p>
 
-# vue-runtime-pixi
+<h1 align="center">VuePixi</h1>
 
-# 🌈 DEMO
+<br /><br /><br />
+
+<p align="center">
+  <strong>Write PIXI applications using Vue SFC 👌</strong>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/forks/huodoushigemi/vue-runtime-pixi.svg?style=flat-square" />
+  <img src="https://img.shields.io/github/stars/huodoushigemi/vue-runtime-pixi.svg?style=flat-square" />
+  <img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="license" />
+  <img src="https://img.shields.io/badge/pixi-v7+-ff69b4.svg?style=flat-square" alt="pixi version" />
+</p>
+
+<br />
+
+## News!
+- Full Vue3 support including [Vue Router](https://router.vuejs.org/)、[Pinia](https://pinia.vuejs.org/)、[VueUse](https://vueuse.org/)
+- Typescript friendly
+
+## 🌈 DEMO
 - [exmaple-animation1]()
 - [exmaple-animation2]()
 - [exmaple-animation3]()
@@ -10,12 +31,12 @@
 - [exmaple-snake 🐍]()
 - [exmaple-plane-fights ✈]()
 
-# ⚙️ Installation
+## ⚙️ Installation
 ```shell
 npm i -S vue-runtime-pixi
 ```
 
-# 🦄 Use
+## 🦄 Use
 ```js
 // main.ts
 import { Application } from 'pixi.js'
@@ -26,16 +47,13 @@ import App from './App.vue'
 const app = createApp(App)
 app.mount('#app')
 
-const { stage, view } = new Application()
-
-createPIXI({
-  setup() {
-    return () => h('Text', { text: 'test……', style: 'fill: red' })
+const RootComponent = {
+  render() {
+    return () => h('Text', { text: '😉test……', style: 'fill: red' })
   }
-}).mount(stage)
+}
 
-document.querySelector('#app').appendChild(view)
-
+createPIXI(RootComponent).mount('#app')
 ```
 ```js
 // vite.config.ts
@@ -51,11 +69,34 @@ export default defineConfig({
 
 ```
 
-# ⭐️ Show Your Support
+## Used with VueRouter
+```js
+import { h } from 'vue'
+import { createApp as createPIXI } from 'vue-runtime-pixi'
+import { createRouter, createWebHashHistory， RouterView } from 'vue-router'
+
+const RootComponent = {
+  render: () => h(RouterView)
+}
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes: [
+    { path: '/', redirect: '/aaa' },
+    { path: '/aaa', component: { render: () => h('Text', { text: 'aaa……', style: 'fill: red' }) } },
+    { path: '/bbb', component: { render: () => h('Text', { text: 'bbb……', style: 'fill: red' }) } },
+  ]
+})
+
+createPIXI(RootComponent).use(router).mount('#app')
+```
+
+
+## ⭐️ Show Your Support
 
 Please give a ⭐️ if this project helped you!
 
-# 👏 Contributing
+## 👏 Contributing
 
 If you have any questions or requests or want to contribute, please write the issue or give me a Pull Request freely.
 
