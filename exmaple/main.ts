@@ -1,13 +1,13 @@
 import { createApp, h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
 import App from './App.vue'
-import { createRouter, createWebHistory, RouterView } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import AppPIXI from './AppPIXI.vue'
 
 createApp(App).mount('#app')
 
 const router = createRouter({
-  history: createWebHistory(''),
+  history: createWebHashHistory(),
   routes: [
     { path: '/', redirect: '/Animation1' },
     { path: '/Animation1', component: () => import('./Animation1.vue') },

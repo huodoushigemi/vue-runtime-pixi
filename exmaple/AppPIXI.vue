@@ -1,9 +1,9 @@
 <template>
   <!-- tabs -->
-  <AssetsLoad :urls="['/button.png', '/button_hover.png', '/button_pressed.png', '/button_disabled.png']">
+  <AssetsLoad :urls="['button.png', 'button_hover.png', 'button_pressed.png', 'button_disabled.png']">
     <Class :is="scrollbox">
       <Container v-for="path in routes">
-        <Class :is="FancyButton" :ref="cb" v-bind="btnprops" :defaultView="Sprite.from('/button.png')" :hoverView="Sprite.from('/button_hover.png')" :pressedView="Sprite.from('/button_pressed.png')" :text="path" @click="onClick(path)" />
+        <Class :is="FancyButton" :ref="cb" v-bind="btnprops" :defaultView="Sprite.from('button.png')" :hoverView="Sprite.from('button_hover.png')" :pressedView="Sprite.from('button_pressed.png')" :text="path" @click="onClick(path)" />
       </Container>
     </Class>
   </AssetsLoad>
