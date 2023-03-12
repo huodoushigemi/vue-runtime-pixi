@@ -68,14 +68,6 @@ export default defineConfig({
   ]
 })
 ```
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "types": ["vue-runtime-pixi/dist/global"]
-  }
-}
-```
 
 ## Used with VueRouter
 ```js
