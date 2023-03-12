@@ -1,7 +1,5 @@
-import type { Application, DisplayObjectEvents } from 'pixi.js'
 import { utils } from '@pixi/core'
-
-import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, ICanvas, Application } from 'pixi.js'
+import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, Application, DisplayObjectEvents } from 'pixi.js'
 // import * as PIXI from 'pixi.js'
 import type { DefineComponent } from 'vue'
 
@@ -9,35 +7,34 @@ import type { DefineComponent } from 'vue'
 // type DisplayObjectKeys = Extract<typeof PIXI, DisplayObject>
 
 // prettier-ignore
-type ExtendOf<T, P, TRUE = true, FALSE = false> = T extends null | undefined ? FALSE :
-  T extends P ? TRUE :
-  T extends { prototype: infer V } ? ExtendOf<V, P, TRUE, FALSE> :
-  FALSE
+// type ExtendOf<T, P, TRUE = true, FALSE = false> = T extends null | undefined ? FALSE :
+// T extends P ? TRUE :
+// T extends { prototype: infer V } ? ExtendOf<V, P, TRUE, FALSE> :
+// FALSE
 
-type Fun2Arr<T> = {
-  [K in ExcludeP<T, '_' | 'on'>]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
+declare type Fun2Arr<T> = {
+  [K in keyof T]?: T[K] extends (...args: infer A) => any ? (A extends [] ? boolean | [] : A) : T[K]
 }
 
-type EventListener<T, K> = utils.EventEmitter.EventListener<T, K>
-type Events = { [K in keyof DisplayObjectEvents as `on${Capitalize<K>}`]: EventListener<DisplayObjectEvents, K> }
+type Events = { [K in keyof DisplayObjectEvents as `on${Capitalize<K>}`]: utils.EventEmitter.EventListener<DisplayObjectEvents, K> }
 
 type IsP<T, P, TRUE, FALSE> = T extends `${P}${infer S}` ? TRUE : FALSE
-type ExcludeP<T, P> = { [K in keyof T]: IsP<K, P, never, K> }[keyof T]
+type ExcludeP<T, P> = Exclude<{ [K in keyof T]: IsP<K, P, never, K> }[keyof T], undefined>
 
-type DefineDO<T> = DefineComponent<Fun2Arr<T> & Partial<Events>>
+type DefineDO<T> = DefineComponent<Fun2Arr<Pick<T, ExcludeP<T, '_' | 'on'>>> & Partial<Events>>
 
 interface _Text extends Text {
-  style: string | Partial<ITextStyle>
+  style: TextStyle | Partial<ITextStyle> | string
 }
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $stage: Container
-    $app: Application
+    $app: Application<HTMLCanvasElement>
   }
 
   export interface GlobalComponents extends DisplayObjects {
-    AssetsLoad: typeof import('./components')['AssetsLoad']
+    AssetsLoad: typeof import('vue-runtime-pixi/components')['AssetsLoad']
   }
 
   type DisplayObjects = {

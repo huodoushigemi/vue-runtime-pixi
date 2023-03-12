@@ -52,11 +52,4 @@ onBeforeUnmount(() => {
   tweens.forEach(e => e.kill())
   pause()
 })
-
-function toGithub() {
-  const a = document.createElement('a')
-  a.href = 'https://github.com/huodoushigemi/vue-canvas-snake.git'
-  a.target = '_blank'
-  a.click()
-}
 </script>

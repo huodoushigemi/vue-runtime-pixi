@@ -17,6 +17,6 @@
     },
     "outDir": "dist"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "exmaple/**/*"],
+  "include": ["src/**/*", "global.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

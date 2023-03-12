@@ -3,7 +3,7 @@
   <Sprite :ref="bunny2" image="bunny.png" :y="100" />
   <Sprite :ref="bunny3" image="bunny.png" :y="200" />
   <Sprite :ref="bunny4" image="bunny.png" :x="100" :y="350" :anchor+="{ x: 0.5, y: 0.5 }" />
-  <Sprite :ref="bunny5" image="bunny.png" :key="count" :x="50" :y="450" :tint="`0x${((Math.random() * 16777215) >> 0).toString(16)}`" />
+  <Sprite :ref="bunny5" image="bunny.png" :key="count" :x="50" :y="450" :tint="+`0x${((Math.random() * 16777215) >> 0).toString(16)}`" />
 </template>
 
 <script setup lang="ts">

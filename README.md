@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="./public/techs-free-weekend.png" alt="pixi-react" width="310" />
+  <img src="https://raw.githubusercontent.com/huodoushigemi/vue-runtime-pixi/main/public/techs-free-weekend.png" alt="hero image" width="310" />
+  <img src="https://raw.githubusercontent.com/huodoushigemi/vue-runtime-pixi/main/public/pixi.png" alt="pixijs" width="310" />
 </p>
 
 <h1 align="center">Vue Runtime Pixi</h1>
@@ -49,7 +50,7 @@ app.mount('#app')
 
 const RootComponent = {
   render() {
-    return () => h('Text', { text: '😉test……', style: 'fill: red' })
+    return h('Text', { text: '😉test……', style: 'fill: red' })
   }
 }
 
@@ -66,7 +67,14 @@ export default defineConfig({
     vue({ template: { compilerOptions: { isCustomElement: isPIXITag } } })
   ]
 })
-
+```
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": ["vue-runtime-pixi/dist/global"]
+  }
+}
 ```
 
 ## Used with VueRouter

@@ -1,3 +1,5 @@
+/// <reference path="../global.d.ts" />
+
 import * as PIXI from 'pixi.js'
 import { Application, Container, DisplayObject, IApplicationOptions } from 'pixi.js'
 import { createRenderer, Renderer, RootRenderFunction, getCurrentInstance, ComponentPublicInstance, App, Component } from 'vue'
@@ -12,7 +14,7 @@ function ensureRenderer() {
   return (renderer ??= createRenderer(nodeOps))
 }
 
-type RootProps = { app: Application } & IApplicationOptions & Record<string, unknown>
+type RootProps = { app: Application<HTMLCanvasElement> } & IApplicationOptions & Record<string, unknown>
 interface _App extends App {
   _props: RootProps
   mount(c: string | Element): ComponentPublicInstance | null

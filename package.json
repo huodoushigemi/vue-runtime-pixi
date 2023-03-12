@@ -1,13 +1,14 @@
 {
   "name": "vue-runtime-pixi",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.cjs.js",
-  "module": "./dist/index.esm.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "global.d.ts"
   ],
   "repository": {
     "type": "git",
