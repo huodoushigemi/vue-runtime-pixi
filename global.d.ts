@@ -1,5 +1,5 @@
-import { utils } from '@pixi/core'
-import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, Application, DisplayObjectEvents } from 'pixi.js'
+import type { Texture, utils, IPoint, Geometry, Point } from '@pixi/core'
+import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, Application, DisplayObjectEvents, MeshMaterial } from 'pixi.js'
 // import * as PIXI from 'pixi.js'
 import type { DefineComponent } from 'vue'
 
@@ -40,17 +40,17 @@ declare module '@vue/runtime-core' {
   type DisplayObjects = {
     Container: DefineDO<Container>
     Sprite: DefineDO<Sprite & { image: string }>
-    AnimatedSprite: DefineDO<AnimatedSprite>
+    AnimatedSprite: DefineDO<AnimatedSprite> & DefineComponent<{ texture: Texture }>
     Text: DefineDO<_Text>
     Graphics: DefineDO<Graphics>
     TemporaryDisplayObject: DefineDO<TemporaryDisplayObject>
-    Mesh: DefineDO<Mesh>
-    NineSlicePlane: DefineDO<NineSlicePlane>
+    Mesh: DefineDO<Mesh> & DefineComponent<{ geometry: Geometry; shader: MeshMaterial }>
+    NineSlicePlane: DefineDO<NineSlicePlane> & DefineComponent<{ texture: Texture }>
     SimpleMesh: DefineDO<SimpleMesh>
-    SimplePlane: DefineDO<SimplePlane>
-    SimpleRope: DefineDO<SimpleRope>
+    SimplePlane: DefineDO<SimplePlane> & DefineComponent<{ texture: Texture }>
+    SimpleRope: DefineDO<SimpleRope> & DefineComponent<{ texture: Texture; points: Point[] }>
     ParticleContainer: DefineDO<ParticleContainer>
-    TilingSprite: DefineDO<TilingSprite>
+    TilingSprite: DefineDO<TilingSprite> & DefineComponent<{ texture: Texture }>
     BitmapText: DefineDO<BitmapText>
     Class: DefineComponent<{ is: DisplayObject | typeof DisplayObject }>
   }
