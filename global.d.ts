@@ -40,7 +40,7 @@ declare module '@vue/runtime-core' {
   type DisplayObjects = {
     Container: DefineDO<Container>
     Sprite: DefineDO<Sprite & { image: string }>
-    AnimatedSprite: DefineDO<AnimatedSprite> & DefineComponent<{ texture: Texture }>
+    AnimatedSprite: DefineDO<AnimatedSprite> & DefineComponent<{ textures: Texture[] }>
     Text: DefineDO<_Text>
     Graphics: DefineDO<Graphics>
     TemporaryDisplayObject: DefineDO<TemporaryDisplayObject>
