@@ -73,7 +73,7 @@ export default defineConfig({
 ```js
 import { h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
-import { createRouter, createWebHashHistory， RouterView } from 'vue-router'
+import { createRouter, createWebHashHistory, RouterView } from 'vue-router'
 
 const RootComponent = {
   render: () => h(RouterView)
