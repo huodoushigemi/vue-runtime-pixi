@@ -34,7 +34,7 @@
 
 ## ⚙️ Installation
 ```shell
-npm i -S vue-runtime-pixi
+npm i -S vue-runtime-pixi vue pixi.js
 ```
 
 ## 🦄 Use
