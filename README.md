@@ -6,7 +6,9 @@
 <h1 align="center">Vue Runtime Pixi</h1>
 
 <p align="center">
-  <strong>Write PIXI applications using Vue SFC 👌</strong>
+  <strong>Vue createRenderer for PixiJS</strong>
+  <br />
+  <sub>Write PIXI applications using Vue SFC 👌</sub>
 </p>
 
 <br />
@@ -21,10 +23,12 @@
 <br />
 
 ## 📑 News!
+
 - Full Vue3 support including [Vue Router](https://router.vuejs.org/)、[Pinia](https://pinia.vuejs.org/)、[VueUse](https://vueuse.org/)
 - Typescript friendly
 
 ## 🌈 DEMO
+
 - [exmaple-animation1](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation1)
 - [exmaple-animation2](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation2)
 - [exmaple-animation3](https://huodoushigemi.github.io/vue-runtime-pixi/#/Animation3)
@@ -33,11 +37,13 @@
 - [exmaple-plane-fights 🚀](https://huodoushigemi.github.io/vue-runtime-pixi/#/PlaneFights%20🚀)
 
 ## ⚙️ Installation
+
 ```shell
 npm i -S vue-runtime-pixi vue pixi.js
 ```
 
 ## 🦄 Use
+
 ```js
 // main.ts
 import { Application } from 'pixi.js'
@@ -56,6 +62,7 @@ const RootComponent = {
 
 createPIXI(RootComponent).mount('#app')
 ```
+
 ```js
 // vite.config.ts
 import { defineConfig } from 'vite'
@@ -63,13 +70,12 @@ import vue from '@vitejs/plugin-vue'
 import { isPIXITag } from 'vue-runtime-pixi'
 
 export default defineConfig({
-  plugins: [
-    vue({ template: { compilerOptions: { isCustomElement: isPIXITag } } })
-  ]
+  plugins: [vue({ template: { compilerOptions: { isCustomElement: isPIXITag } } })]
 })
 ```
 
 ## Used with VueRouter
+
 ```js
 import { h } from 'vue'
 import { createApp as createPIXI } from 'vue-runtime-pixi'
@@ -84,13 +90,12 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/aaa' },
     { path: '/aaa', component: { render: () => h('Text', { text: 'aaa……', style: 'fill: red' }) } },
-    { path: '/bbb', component: { render: () => h('Text', { text: 'bbb……', style: 'fill: red' }) } },
+    { path: '/bbb', component: { render: () => h('Text', { text: 'bbb……', style: 'fill: red' }) } }
   ]
 })
 
 createPIXI(RootComponent).use(router).mount('#app')
 ```
-
 
 ## ⭐️ Show Your Support
 
