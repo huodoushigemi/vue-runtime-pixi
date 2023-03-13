@@ -1,14 +1,13 @@
 {
   "name": "vue-runtime-pixi",
   "private": false,
-  "version": "0.0.6",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "global.d.ts"
+    "dist"
   ],
   "description": "Vue createRenderer for PixiJS",
   "repository": {
@@ -20,6 +19,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rimraf dist && rollup -c",
+    "postbuild": "cp src/global.d.ts dist/global.d.ts",
     "docs": "vite build",
     "preview": "vite preview"
   },

@@ -1,5 +1,5 @@
 import type { Texture, utils, IPoint, Geometry, Point } from '@pixi/core'
-import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, Application, DisplayObjectEvents, MeshMaterial } from 'pixi.js'
+import type { Container, DisplayObject, Text, Graphics, TextStyle, Sprite, AnimatedSprite, BitmapText, TilingSprite, ParticleContainer, SimpleRope, SimplePlane, SimpleMesh, NineSlicePlane, Mesh, TemporaryDisplayObject, ITextStyle, Application, DisplayObjectEvents, MeshMaterial, IApplicationOptions } from 'pixi.js'
 // import * as PIXI from 'pixi.js'
 import type { DefineComponent } from 'vue'
 
@@ -34,7 +34,8 @@ declare module '@vue/runtime-core' {
   }
 
   export interface GlobalComponents extends DisplayObjects {
-    AssetsLoad: typeof import('vue-runtime-pixi/components')['AssetsLoad']
+    AssetsLoad: typeof import('./components')['AssetsLoad']
+    Stage: typeof import('./components')['Stage']
   }
 
   type DisplayObjects = {

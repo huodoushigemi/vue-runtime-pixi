@@ -4,6 +4,7 @@ import * as PIXI from 'pixi.js'
 import { AnimatedSprite, Container, DisplayObject, Graphics, Mesh, NineSlicePlane, ParticleContainer, SimpleMesh, SimplePlane, SimpleRope, Sprite, TemporaryDisplayObject, Text, Texture, TilingSprite } from 'pixi.js'
 import patchEvent from './modules/event'
 import { patchStyle } from './modules/style'
+import { INJECTED, CRO_KEY, RO } from './CustomPIXIComponent'
 import { get, set } from './utils'
 
 const OP = ':'
@@ -47,7 +48,16 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
     let clazz
     if (type === 'Class') clazz = props.is?.prototype instanceof DisplayObject ? props.is : null
     else if (PIXI[type]?.prototype instanceof DisplayObject) clazz = PIXI[type]
-    return clazz ? (clazz.length == 1 ? new clazz(props) : new clazz()) : null
+    // new clazz
+    if (clazz) return clazz.length == 1 ? new clazz(props) : new clazz()
+
+    // Custom Renderer Options
+    const cro = INJECTED[type]
+    if (cro) {
+      const el = cro.createElement.apply(cro, arguments)
+      el[CRO_KEY] = cro
+      return el
+    }
   },
   insert(el, parent, anchor) {
     if (!el || !parent) return
@@ -70,26 +80,30 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
       }
       switch (key) {
         case 'style':
-          patchStyle(el as any, preVal, nxtVal)
-          break
+          if (el instanceof Text) return patchStyle(el as any, preVal, nxtVal)
         case 'image':
-          if (el instanceof Sprite) el.texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal
-          break
+          if (el instanceof Sprite) return (el.texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal)
         default:
-          set(el, key, nxtVal, OP)
+          // Custom Renderer Options
+          const cro = el[CRO_KEY] as RO
+          if (cro) {
+            cro.patchProp.apply(cro, arguments)
+          } else {
+            set(el, key, nxtVal, OP)
+          }
           break
       }
     }
   },
   createText(text) {
-    return new PIXI.Text(text)
+    return new Text(text)
   },
   createComment(text) {
-    const comment = new PIXI.Text(`<!-- ${text} -->`)
+    const comment = new Text(`<!-- ${text} -->`)
     comment.visible = false
     return comment
   },
-  setText(node: PIXI.Text, text) {
+  setText(node: Text, text) {
     node.text = text
   },
   setElementText() {},
@@ -97,6 +111,6 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
     return node?.parent
   },
   nextSibling(node) {
-    return node?.parent.children[node.parent.getChildIndex(node) + 1]
+    return node?.parent?.children[node.parent.getChildIndex(node) + 1]
   }
 }
