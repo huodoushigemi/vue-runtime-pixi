@@ -101,9 +101,9 @@ const router = createRouter({
 
 Vue Runtime Pixi currently supports following components out of the box (but read Custom Components section if you need more):
 
-#### `<Stage />`
+#### [`<Stage />`]
 
-Renders [Root Container] of any [`PIXI.Application`].
+Renders Root Container of any [`PIXI.Application`].
 
 - `uses` - pass your own [`Vue.Plugins`] instance,
 - `options` - pass only the [`PIXI.Application`] options.
@@ -138,7 +138,7 @@ If you have any questions or requests or want to contribute, please write the is
 [PixiJS]: https://github.com/pixijs/pixi.js
 [Vue]: https://github.com/vuejs/core
 [`Vue.Plugins`]: https://vuejs.org/guide/reusability/plugins.html
-[Root Container]: http://pixijs.download/release/docs/PIXI.Application.html#stage
+[`<Stage />`]: http://pixijs.download/release/docs/PIXI.Application.html#stage
 [`PIXI.Application`]: http://pixijs.download/release/docs/PIXI.Application.html#stage
 [`<Application />`]: http://pixijs.download/release/docs/PIXI.Application.html
 [`<BitmapText />`]: http://pixijs.download/release/docs/PIXI.BitmapText.html
