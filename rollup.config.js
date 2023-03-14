@@ -1,8 +1,6 @@
 import { defineConfig } from 'rollup'
 import esbuild from 'rollup-plugin-esbuild'
-// import vue from '@vitejs/plugin-vue'
-import vue from 'unplugin-vue/rollup'
-import typescript from '@rollup/plugin-typescript'
+import vue from '@vitejs/plugin-vue'
 import pkg from './package.json' assert { type: 'json' }
 
 const formats = ['esm', 'cjs']

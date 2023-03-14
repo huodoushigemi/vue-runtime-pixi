@@ -70,7 +70,7 @@ export default defineConfig({
 })
 ```
 
-## Used with VueRouter
+## 🦄 Used with VueRouter
 
 <!-- prettier-ignore -->
 ```html
@@ -97,7 +97,7 @@ const router = createRouter({
 </script>
 ```
 
-## Components
+## 🎁 Components
 
 Vue Runtime Pixi currently supports following components out of the box (but read Custom Components section if you need more):
 
