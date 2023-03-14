@@ -1,7 +1,7 @@
 {
   "name": "vue-runtime-pixi",
   "private": false,
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0",
   "type": "module",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

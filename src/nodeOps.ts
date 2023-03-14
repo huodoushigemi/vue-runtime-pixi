@@ -1,10 +1,10 @@
 import { RendererOptions } from 'vue'
 import { isOn, isString } from '@vue/shared'
 import * as PIXI from 'pixi.js'
-import { AnimatedSprite, Container, DisplayObject, Graphics, Mesh, NineSlicePlane, ParticleContainer, SimpleMesh, SimplePlane, SimpleRope, Sprite, TemporaryDisplayObject, Text, Texture, TilingSprite } from 'pixi.js'
+import { AnimatedSprite, BitmapText, Container, DisplayObject, Graphics, Mesh, NineSlicePlane, ParticleContainer, SimpleMesh, SimplePlane, SimpleRope, Sprite, TemporaryDisplayObject, Text, Texture, TilingSprite } from 'pixi.js'
 import patchEvent from './modules/event'
 import { patchStyle } from './modules/style'
-import { INJECTED, CRO_KEY, RO } from './CustomPIXIComponent'
+import { INJECTED, getCRO, setCRO } from './CustomPIXIComponent'
 import { get, set } from './utils'
 
 const OP = ':'
@@ -16,7 +16,7 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
       case 'Sprite':
         return new Sprite(props.texture)
       case 'BitmapText':
-        return new Sprite(props.text)
+        return new BitmapText(props.text)
       case 'TilingSprite':
         return new TilingSprite(props.texture)
       case 'SimpleRope':
@@ -54,18 +54,26 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
     // Custom Renderer Options
     const cro = INJECTED[type]
     if (cro) {
-      const el = cro.createElement.apply(cro, arguments)
-      el[CRO_KEY] = cro
+      const el = cro.createElement(props)
+      setCRO(el, cro)
       return el
+    } else {
+      console.error(`Component not defined: ${type}`)
+      return new Text(`Component not defined: ${type}`, { fill: 0xff0000 })
     }
   },
   insert(el, parent, anchor) {
     if (!el || !parent) return
     const i = parent.children.indexOf(anchor)
     i > -1 ? parent.addChildAt(el, i) : parent.addChild(el)
+    // Custom Renderer Options
+    getCRO(el)?.onMounted?.(el, parent, anchor)
   },
   remove(el) {
-    el?.removeFromParent()
+    if (!el) return
+    // Custom Renderer Options
+    getCRO(el)?.onBeforeUnmount?.(el)
+    el.removeFromParent()
   },
   patchProp(el, key, preVal, nxtVal) {
     if (!el) return
@@ -85,9 +93,9 @@ export const nodeOps: RendererOptions<DisplayObject | null, Container> = {
           if (el instanceof Sprite) return (el.texture = isString(nxtVal) ? Texture.from(nxtVal) : nxtVal)
         default:
           // Custom Renderer Options
-          const cro = el[CRO_KEY] as RO
-          if (cro) {
-            cro.patchProp.apply(cro, arguments)
+          const cro = getCRO(el)
+          if (cro?.patchProp) {
+            cro.patchProp(el, key, preVal, nxtVal)
           } else {
             set(el, key, nxtVal, OP)
           }

@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="canvas" />
+  <canvas v-if="!props.options?.view" ref="canvas" />
 </template>
 
 <script setup lang="ts">
@@ -24,7 +24,7 @@ let app: Application<HTMLCanvasElement>
 let vueapp: App
 
 onMounted(() => {
-  app = new Application({ ...props.options, view: canvas.value })
+  app = new Application({ view: canvas.value, ...props.options })
 
   const Root = { render: () => slots.default?.() }
   vueapp = createApp(Root, { app })

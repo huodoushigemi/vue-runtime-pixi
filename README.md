@@ -123,6 +123,56 @@ Renders Root Container of any [`PIXI.Application`].
 [`<TilingSprite />`]
 [`<BitmapText />`]
 
+## 🎁 Custom Components
+
+<details>
+  <summary>
+    <strong>CusomtPIXIComponent API</strong>
+  </summary>
+
+<br />
+
+```js
+// main.ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import { CusomtPIXIComponent } from 'vue-runtime-pixi'
+import { Sprite, Texture } from 'pixi.js'
+
+// Must be before mount('#app')
+CustomPIXIComponent({
+  name: 'MyLogo',
+  createElement(props) {
+    return new Sprite(Texture.from('logo.png'))
+  },
+  patchProp(el, key, oldProp, newProp) {
+    el[key] = newProp
+  },
+  onMounted(el) {
+    //
+  },
+  onBeforeUnmount(el) {
+    //
+  }
+})
+
+createApp(App).mount('#app')
+```
+
+```html
+<template>
+  <Stage>
+    <MyLogo />
+  </Stage>
+</template>
+
+<script setup lang="ts">
+  import { Stage } from 'vue-runtime-pixi'
+</script>
+```
+
+</details>
+
 ## ⭐️ Show Your Support
 
 Please give a ⭐️ if this project helped you!

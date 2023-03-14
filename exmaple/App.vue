@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat-square" alt="license" />
     <img src="https://img.shields.io/badge/pixi-v7+-ff69b4.svg?style=flat-square" alt="pixi version" />
   </p>
-  <p>如你所见，点击按钮切换路由 <a href="https://github.com/huodoushigemi/vue-runtime-pixi/tree/main/exmaple" target="_blank">[Source map]</a></p>
+  <p>Click the button to switch the route <a href="https://github.com/huodoushigemi/vue-runtime-pixi/tree/main/exmaple" target="_blank" style="float: right">[Source map]</a></p>
 
   <Stage :options="{ background: 0x888888 }" :uses="router">
     <AppPIXI />

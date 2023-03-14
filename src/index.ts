@@ -8,7 +8,7 @@ export * from './components'
 import { nodeOps } from './nodeOps'
 export * from './nodeOps'
 export * from './utils'
-export * from './CustomPIXIComponent'
+export { CustomPIXIComponent } from './CustomPIXIComponent'
 
 let renderer: Renderer<Container>
 
@@ -36,4 +36,5 @@ export const createApp = (root: Component, props?: Partial<RootProps>): _App => 
   return vueapp
 }
 
-export const getStage = (): Container => getCurrentInstance().appContext.app.config.globalProperties.$stage
+export const getApp = () => getCurrentInstance().appContext.app.config.globalProperties.$app
+export const getStage = () => getCurrentInstance().appContext.app.config.globalProperties.$stage

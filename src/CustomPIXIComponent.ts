@@ -16,11 +16,20 @@ export const CRO_KEY = Symbol()
  */
 type CRO = {
   name: string
-  createElement: RO['createComment']
+  createElement: (props: { [key: string]: any }) => DisplayObject
   patchProp?: RO['patchProp']
+  onMounted?: RO['insert']
+  onBeforeUnmount?: RO['remove']
 }
 
-export const INJECTED: Record<string, CRO> = {}
+export const INJECTED: Record<string, CRO | null> = {}
+
+export function getCRO(el: DisplayObject) {
+  return el[CRO_KEY] as CRO | null
+}
+export function setCRO(el: DisplayObject, cro: CRO) {
+  el[CRO_KEY] = cro
+}
 
 export function CustomPIXIComponent(cro: CRO) {
   INJECTED[cro.name] = cro
